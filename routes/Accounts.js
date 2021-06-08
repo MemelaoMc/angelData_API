@@ -47,14 +47,14 @@ router.post('/accounts', async (req, res) => {
 
 router.get('/accounts', async (req, res) => {
   try {
-    Accounts.find({}, function (err, result) {
+    await Accounts.find({}, function (err, result) {
       if (!err) {
         return res.send(result);
       }
     })
   }
-  catch (err) {
-    console.log(err);
+  catch (error) {
+    console.log(error);
   }
 });
 
