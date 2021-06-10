@@ -33,15 +33,10 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 
-app.get('/', (req, res) => {
-  res.json({
-    estado: true,
-    mensaje: 'funcionando'
-  })
-});
+app.get('/', (req, res) => res.send('Working!!!'));
 
 // server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`servidor andando en: ${PORT}`)
+  console.log(`server running on port: ${PORT}`)
 })
