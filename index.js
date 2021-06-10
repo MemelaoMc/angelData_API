@@ -21,10 +21,6 @@ mongoose.connect(uri,
 const authRoutes = require('./routes/auth');
 const accounts = require('./routes/Accounts');
 
-// route middlewares
-app.use('/api/v1/user', authRoutes);
-app.use('/api/v1', accounts);
-
 // cors
 let allowedOrigins = ['http://localhost:3000',
   'https://modest-aryabhata-c37ede.netlify.app'];
@@ -45,6 +41,10 @@ var corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions));
+
+// route middlewares
+app.use('/api/v1/user', authRoutes);
+app.use('/api/v1', accounts);
 
 app.get('/', (req, res) => res.send('Working!!!'));
 
