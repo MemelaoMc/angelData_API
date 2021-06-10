@@ -64,17 +64,18 @@ router.post('/login', async (req, res) => {
   if (!validPassword) return res.status(400).json({ error: 'contraseña no válida' })
 
   const token = jwt.sign({
+    id: user._id,
     user_name: user.user_name,
-    id: user._id
   }, process.env.TOKEN_SECRET);
 
-  res.header('auth-token', token).json({
+  res.header('Authorization', token).json({
     error: null,
-    data: { token }
+    data: {
+      id: user._id,
+      user_name: user.user_name,
+      token
+    }
   })
-
-  res.send('Bienvenido');
-
 
 })
 

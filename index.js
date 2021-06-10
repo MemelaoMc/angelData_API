@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 require('dotenv').config();
+const verifyToken = require('./routes/validate-token');
 
 const app = express();
 
@@ -44,7 +45,7 @@ app.use(cors(corsOptions));
 
 // route middlewares
 app.use('/api/v1/user', authRoutes);
-app.use('/api/v1', accounts);
+app.use('/api/v1', verifyToken, accounts);
 
 app.get('/', (req, res) => res.send('Working!!!'));
 
