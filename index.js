@@ -26,10 +26,22 @@ app.use('/api/user', authRoutes);
 app.use('/api/v1', accounts);
 
 // cors
+let allowedOrigins = ['http://localhost:3000',
+  'https://modest-aryabhata-c37ede.netlify.app'];
+
 const cors = require('cors');
 var corsOptions = {
-  origin: '*', // Reemplazar con dominio
-  'Access-Control-Allow-Origin': '*',
+  origin: function (origin, callback) {
+    // allow requests with no origin
+    // (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+        'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }, // Reemplazar con dominio
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions));
