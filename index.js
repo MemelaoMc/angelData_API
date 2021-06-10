@@ -22,7 +22,7 @@ const authRoutes = require('./routes/auth');
 const accounts = require('./routes/Accounts');
 
 // route middlewares
-app.use('/api/user', authRoutes);
+app.use('/api/v1/user', authRoutes);
 app.use('/api/v1', accounts);
 
 // cors
